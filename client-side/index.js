@@ -61,7 +61,7 @@ function renderList(todos) {
           
         </div>`;
         })
-        .join();
+        .join('');
     listContainer.innerHTML = todosInnerHTML;
 }
 

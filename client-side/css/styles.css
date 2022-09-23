@@ -1,2 +1,14 @@
+/* The app is buggy if the css variables are put here */
+/* It's wired */
+/* :root {
+ --primary-b-color: #eeca86;
+ --secondary-bg-color:#F4F4F4;
+ --primary-button-color:#3A8CB7;
+ --second-button-color:rgb(202, 65, 65);
+
+} */
+
 @import url(todoItem.css);
 @import url(input.css);
+@import url(home.css);
+@import url(todolist.css);

@@ -1,0 +1,31 @@
+.input{
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+}
+
+input[type=text] {
+  padding: 12px 20px;
+  margin: 8px 0;
+  border:1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+}
+
+input[type=text]:focus {
+  outline: 1px solid #ccc;;
+}
+
+button {
+  margin: 8px 1rem;
+  padding: 6px 12px;
+  border-radius:8px;
+  border: none;
+  background-color: var(--primary-button-color);
+  color: white;
+  cursor: pointer;
+
+  text-align: center;
+  font-size: 1.5rem;
+}

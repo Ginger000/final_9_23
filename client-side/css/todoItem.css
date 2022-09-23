@@ -1,11 +1,18 @@
+@import url(variables.css);
+
 .todo__item{
   display: flex;
-
+  background-color: var(--primary-bg-color);
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .todo__content{
   flex-grow: 1;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .todo__icon svg{
