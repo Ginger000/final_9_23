@@ -32,3 +32,13 @@
   fill:white;
   background-color: rgb(202, 65, 65);
 }
+
+.todo__content--cross {
+  text-decoration: line-through;
+  color: rgb(170, 170, 170);
+}
+
+.todo__placeholder{
+  color: var(--primary-bg-color);
+  font-size: 2rem;
+}

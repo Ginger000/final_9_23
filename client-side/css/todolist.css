@@ -1,8 +1,7 @@
 .list__container{
   border: 2px solid var(--primary-bg-color);
   border-radius: 10px;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
+  text-align: center;
   padding: 0.5rem;
+  min-height: 700px;
 }

@@ -48,20 +48,26 @@ function setUpTodoList() {
 
 //render each todo item in one todo list
 function renderList(todos) {
-    const sortedTodos = todos.sort((a, b) => b.date - a.date);
-    const todosInnerHTML = sortedTodos
-        .map((todo) => {
-            return `
+    let todosInnerHTML;
+    if (todos.length === 0) {
+        todosInnerHTML = `<div class="todo__placeholder"> No Task Yet</div>`;
+    } else {
+        const sortedTodos = todos.sort((a, b) => b.date - a.date);
+        todosInnerHTML = sortedTodos
+            .map((todo) => {
+                return `
         <div class="todo__item">
-          <div class="todo__content" id="title-${todo.id}">${todo.title}</div>
+          <div class="todo__content" id="title-${todo.id}" onclick="crossTodo(${todo.id})">${todo.title}</div>
           <div>
             <span class="todo__icon todo__icon--edit"" onclick="startEdit(${todo.id})">${editIcon}</span>
             <span class="todo__icon todo__icon--delete" onclick="handleDelete(${todo.id})">${deleteIcon}</span>
           </div>
           
         </div>`;
-        })
-        .join('');
+            })
+            .join('');
+    }
+
     listContainer.innerHTML = todosInnerHTML;
 }
 
@@ -144,4 +150,10 @@ function startEdit(id) {
     }
 
     isEditing = !isEditing;
+}
+
+// cross out when click the todo item
+function crossTodo(id) {
+    const currTodoItem = document.getElementById(`title-${id}`);
+    currTodoItem.classList.add('todo__content--cross');
 }
