@@ -30,6 +30,9 @@ class State {
 const state = new State();
 
 //as the app is initiated
+//my question: Is this the same function as useEffect?
+//it call the function everytime the page is refreshed?
+//That's the reason I don't call render function again after CRUD?
 (() => {
     setUpTodoList();
     setUpPostEvent();
@@ -71,6 +74,7 @@ function renderList(todos) {
     listContainer.innerHTML = todosInnerHTML;
 }
 
+//submit newTodo and post to the server
 function setUpPostEvent() {
     inputForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -97,6 +101,7 @@ function setUpPostEvent() {
     });
 }
 
+//Delete the todo item from server
 function handleDelete(id) {
     const targetURL = getTodoItemEndPoint(id);
     fetch(targetURL, {
@@ -108,6 +113,7 @@ function handleDelete(id) {
         .catch((err) => alert(err));
 }
 
+//updated the edited todo item to the server
 function updateEdit(id) {
     const targetURL = getTodoItemEndPoint(id);
     const editingContent = document.querySelector('.todo__editing');
@@ -132,16 +138,23 @@ function updateEdit(id) {
         .catch((err) => console.log(err));
 }
 
-function swtichInterfaceToEdit(id) {
+//switch to the input form when click the edit button
+function switchInterfaceToEdit(id) {
     const currTodoItem = document.getElementById(`title-${id}`);
     currTodoItem.innerHTML = `<input class="todo__editing" type="text">`;
 }
 
+//switch back to normal todo item after clicking edit button
+//when the edit is finished
 function switchInterfaceToList(todo) {
     const currTodoItem = document.getElementById(`title-${id}`);
     currTodoItem.innerHTML = `${todo.title}`;
 }
 
+//trigger todo item switch to edit mode
+//or trigger the http put behavior
+//depends on the global boolean value 'isEditing' regarding
+//whether user is editing
 function startEdit(id) {
     if (isEditing === true) {
         updateEdit(id);
