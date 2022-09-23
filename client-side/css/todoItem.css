@@ -1,0 +1,27 @@
+.todo__item{
+  display: flex;
+
+}
+
+.todo__content{
+  flex-grow: 1;
+  text-align: center;
+}
+
+.todo__icon svg{
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.todo__icon--edit svg{
+  fill:white;
+  background-color: rgb(56, 135, 240);
+  
+}
+
+.todo__icon--delete svg{
+  fill:white;
+  background-color: rgb(202, 65, 65);
+}
