@@ -55,7 +55,7 @@ function renderList(todos) {
         <div class="todo__item">
           <div class="todo__content" id="title-${todo.id}">${todo.title}</div>
           <div>
-            <span class="todo__icon todo__icon--edit" id="edit-${todo.id}" onclick="startEdit(${todo.id})">${editIcon}</span>
+            <span class="todo__icon todo__icon--edit"" onclick="startEdit(${todo.id})">${editIcon}</span>
             <span class="todo__icon todo__icon--delete" onclick="handleDelete(${todo.id})">${deleteIcon}</span>
           </div>
           
@@ -121,22 +121,26 @@ function updateEdit(id) {
                 todo.id === id ? data : todo
             );
             isEditing = false;
-            const currEditButton = document.querySelector(`edit-#${id}`);
-            currEditButton.addEventListener('click', startEdit);
+            switchInterfaceToList(data);
         })
         .catch((err) => console.log(err));
 }
 
-function swtichInterface(id) {
+function swtichInterfaceToEdit(id) {
     const currTodoItem = document.getElementById(`title-${id}`);
     currTodoItem.innerHTML = `<input class="todo__editing" type="text">`;
+}
+
+function switchInterfaceToList(todo) {
+    const currTodoItem = document.getElementById(`title-${id}`);
+    currTodoItem.innerHTML = `${todo.title}`;
 }
 
 function startEdit(id) {
     if (isEditing === true) {
         updateEdit(id);
     } else {
-        swtichInterface(id);
+        swtichInterfaceToEdit(id);
     }
 
     isEditing = !isEditing;
