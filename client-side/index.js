@@ -9,8 +9,8 @@ const listContainer = document.querySelector('.list__container');
 
 const inputForm = document.querySelector('.input');
 const inputContent = document.querySelector('.input__content');
-const editingContent = document.querySelector('.todo_editing');
-const isEditing = false;
+
+let isEditing = false;
 
 //state class for todos
 class State {
@@ -53,7 +53,7 @@ function renderList(todos) {
         .map((todo) => {
             return `
         <div class="todo__item">
-          <div class="todo__content" id="${todo.id}">${todo.title}</div>
+          <div class="todo__content" id="title-${todo.id}">${todo.title}</div>
           <div>
             <span class="todo__icon todo__icon--edit" id="edit-${todo.id}" onclick="startEdit(${todo.id})">${editIcon}</span>
             <span class="todo__icon todo__icon--delete" onclick="handleDelete(${todo.id})">${deleteIcon}</span>
@@ -104,9 +104,10 @@ function handleDelete(id) {
 
 function updateEdit(id) {
     const targetURL = getTodoItemEndPoint(id);
-
-    const oldTodo = state.todos((todo) => (todo.id = id))[0];
-    const updTodo = { ...oldTodo, title: editingContent };
+    const editingContent = document.querySelector('.todo__editing');
+    console.log('editingContent', editingContent.value);
+    const oldTodo = state.todos.filter((todo) => (todo.id = id))[0];
+    const updTodo = { ...oldTodo, title: editingContent.value };
     fetch(targetURL, {
         method: 'PUT',
         headers: {
@@ -120,13 +121,23 @@ function updateEdit(id) {
                 todo.id === id ? data : todo
             );
             isEditing = false;
+            const currEditButton = document.querySelector(`edit-#${id}`);
+            currEditButton.addEventListener('click', startEdit);
         })
         .catch((err) => console.log(err));
 }
 
+function swtichInterface(id) {
+    const currTodoItem = document.getElementById(`title-${id}`);
+    currTodoItem.innerHTML = `<input class="todo__editing" type="text">`;
+}
+
 function startEdit(id) {
-    const currTodoItem = document.querySelector(`#${id}`);
-    currTodoItem.innerHTML = `<input class=todo_editing type="text">`;
-    isEditing = true;
-    const currEditButton = document.querySelector(`edit-#${id}`);
+    if (isEditing === true) {
+        updateEdit(id);
+    } else {
+        swtichInterface(id);
+    }
+
+    isEditing = !isEditing;
 }
